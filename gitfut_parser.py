@@ -1,0 +1,1 @@
+# Here will be parser to update png image constantly

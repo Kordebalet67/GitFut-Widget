@@ -2,7 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import os
+import time
 
 
 class Get_My_Stat:
@@ -30,12 +33,15 @@ class Get_My_Stat:
         self.driver = webdriver.Firefox(options=self.options)
 
     def get_stat(self):
-        # https://gitfut.com/Kordebalet67?country=by
-        self.driver.get(f'https://gitfut.com/{self.username}?country={self.country}')
-        download_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/main/div[4]/div[2]/div[3]/div[1]/div/div/button[1]")
         if os.path.exists(f'{self.username}-gitfut.png'):
             os.remove(f'{self.username}-gitfut.png')
+        # https://gitfut.com/Kordebalet67?country=by
+        self.driver.get(f'https://gitfut.com/{self.username}?country={self.country}')
+        download_button = WebDriverWait(self.driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/main/div[4]/div[2]/div[3]/div[1]/div/div/button[1]'))
+    )
         download_button.click()
+        time.sleep(2)
         self.driver.quit()
 
 

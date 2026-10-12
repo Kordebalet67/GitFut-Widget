@@ -29,6 +29,9 @@ class Get_My_Stat:
         self.profile.set_preference("pdfjs.disabled", True)  # Отключаем встроенный PDF-просмотрщик
 
         self.options = Options()
+        self.options.add_argument("-headless") 
+        # Важно: в headless режиме нужно задать размер окна, иначе кнопка может быть "свернута" и не кликабельна
+        self.options.add_argument("--window-size=1920,1080") 
         self.options.profile = self.profile
         self.driver = webdriver.Firefox(options=self.options)
 

@@ -122,7 +122,7 @@ class ImageWidget(QWidget):
         # Можно добавить сброс размера до оригинала
         reset_action = QAction("Сбросить размер", self)
         reset_action.triggered.connect(lambda: self.reset_size())
-        menu.addAction(resest_action)
+        menu.addAction(reset_action)
         
         menu.addSeparator()
         
